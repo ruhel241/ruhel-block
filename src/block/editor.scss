@@ -1,0 +1,58 @@
+/**
+ * #.# Editor Styles
+ *
+ * CSS for just Backend enqueued after style.scss
+ * which makes it higher in priority.
+ */
+
+// .wp-block-cgb-block-testing-guten-block  {
+//   background: $green;
+//   border: 0.2rem solid $black;
+//   color: $black;
+//   margin: 0 auto;
+//   max-width: 740px;
+//   padding: 2rem;
+  
+// }
+
+
+.service-box-backend{ 
+  border: solid 1px #ddd;
+  width: 50%;
+  padding: 10px;
+
+  .service-item{
+    span{
+      position: relative;
+      left: 37%;
+      font-size: 60px;
+      margin-bottom: 60px;
+      margin-top: 20px;
+    }
+    .title{
+      text-align: center;
+      margin: 0;
+      color: #FA4;
+    }
+    .description{
+      font-style: normal;
+      padding: 5px;
+      text-align: center;
+      color: #DC3;
+    }
+    .readMore{
+      position: relative;
+      left: 30%;
+      border: solid #009688;
+      padding: 4px;
+      background: #009688;
+      color: #fff;
+      border-radius: 4px;
+      text-decoration: none;
+    }
+    
+    
+  }
+
+
+}
