@@ -1,12 +1,15 @@
 
-const {  PlainText, RichText, MediaUpload, InspectorControls } = wp.editor;
+const {  PlainText, RichText, MediaUpload, InspectorControls, BlockControls, AlignmentToolbar } = wp.editor;
 const { registerBlockType } = wp.blocks;
 const { TextControl, TextareaControl, SelectControl, ColorPalette } = wp.components;
 const { __ } = wp.i18n; // Import __() from wp.i18n
 
+const { Fragment }  = wp.element;  
+
 //  Import CSS.
 import './style.scss';
 import './editor.scss';
+
 
 
 registerBlockType( 'ruhel-block/ruhel-guten-block', {
@@ -27,7 +30,11 @@ registerBlockType( 'ruhel-block/ruhel-guten-block', {
 			selector: '.description',
 			default: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sit amet sem sit amet nisi mattis rutrum. Donec ultricies porta arcu. Quisque imperdiet efficitur nisl, vitae scelerisque augue gravida id. '
 		},
-		
+
+		alignment: {
+            type: 'string',
+        },
+
 		serviceIcon: {
 			default: 'dashicons dashicons-dashboard'
 		},
@@ -153,14 +160,24 @@ registerBlockType( 'ruhel-block/ruhel-guten-block', {
 						tagName="h2"
 						/>
 						
+
+					<Fragment> 
+						<BlockControls> 
+							<AlignmentToolbar
+								value={ attributes.alignment }
+								onChange={ ( alignmentStyle ) => setAttributes( { alignment: alignmentStyle } )  }
+							/>
+						</BlockControls>
 						<RichText 
+							key="editable"
 							value={ attributes.description }
 							className="description"
-							style={{ color: attributes.descriptionColor }}
-							onChange={ (content) => setAttributes( { description: content }) }
+							style={ { color: attributes.descriptionColor, textAlign:attributes.alignment } }
+							onChange={ (content) => setAttributes( { description: content } ) }
 							tagName="p"
 						/>
-							
+					</Fragment>	
+						
 						<hr/>	
 
 					<a  href={ attributes.readMoreUrl } className="readMore" type="button" target="__blank" style={{ background: attributes.readMoreBtnColor,  border:attributes.readMoreBtnColor }}> Read More </a>
@@ -188,7 +205,7 @@ registerBlockType( 'ruhel-block/ruhel-guten-block', {
 				<div className="service-item"> 
 					<span className={'dashicons dashicons-' + attributes.serviceIcon }></span>
 				 	<h2 className="title" style={{ color: attributes.titleColor }}> { attributes.title } </h2>
-					<p className="description" style={{ color: attributes.descriptionColor }}> { attributes.description } </p>
+					<p className="description" style={{ color: attributes.descriptionColor, textAlign:attributes.alignment }}> { attributes.description } </p>
 					<hr/>	
 					<a  href={ attributes.readMoreUrl } className="readMore" type="button" target="__blank" style={{ background: attributes.readMoreBtnColor,  border:attributes.readMoreBtnColor }}> Read More </a>
 				</div>
